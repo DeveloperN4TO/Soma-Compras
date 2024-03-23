@@ -4,12 +4,7 @@ import android.os.Bundle
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import androidx.core.view.iterator
-import androidx.core.view.updateLayoutParams
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
@@ -27,33 +22,38 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        _binding = ActivityMainBinding.inflate(layoutInflater).apply { setContentView(root) }
+        _binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         supportActionBar?.hide()
 
         navHostFragment = supportFragmentManager.findFragmentById(R.id.containerPai) as NavHostFragment
         navController = navHostFragment.findNavController()
         binding.navigationMenu.setupWithNavController(navController)
-
         binding.navigationMenu.itemIconSize = 110
 
         binding.navigationMenu.setOnNavigationItemSelectedListener { item ->
 
             val animation = AnimationUtils.loadAnimation(this, R.anim.anim_bt)
-
             val view = binding.navigationMenu.findViewById<View>(item.itemId)
             view.startAnimation(animation)
 
-            true
+            when (item.itemId) {
+                R.id.listFragment, R.id.homeFragment, R.id.historicFragment -> {
+                    navController.navigate(item.itemId)
+                    true
+                }
+                else -> false
+            }
         }
-
-
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when(destination.id){
-                R.id.homeFragment -> binding.navigationMenu.visibility = View.VISIBLE
-                R.id.listFragment -> binding.navigationMenu.visibility = View.VISIBLE
-                R.id.historicFragment -> binding.navigationMenu.visibility = View.VISIBLE
-                else -> binding.navigationMenu.visibility = View.GONE
+                R.id.listFragment, R.id.homeFragment, R.id.historicFragment -> {
+                    binding.navigationMenu.visibility = View.VISIBLE
+                }
+                else -> {
+                    binding.navigationMenu.visibility = View.GONE
+                }
             }
         }
     }
@@ -62,5 +62,4 @@ class MainActivity : AppCompatActivity() {
         super.onDestroy()
         _binding = null
     }
-
 }

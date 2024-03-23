@@ -35,7 +35,7 @@ class InitActivity : AppCompatActivity() {
             handler.postDelayed({
                 val intent = Intent(this@InitActivity, MainActivity::class.java)
                 startActivity(intent)
-            }, 900)
+            }, 700)
 
             val animation = AnimationUtils.loadAnimation(this@InitActivity, R.anim.anim_bt)
             binding.btnNext.startAnimation(animation)
