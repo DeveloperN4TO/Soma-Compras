@@ -11,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.compras.R
 import com.example.compras.databinding.ActivityMainBinding
+import com.example.compras.dialog.CustomDialog
 
 class MainActivity : AppCompatActivity() {
 
@@ -31,31 +32,32 @@ class MainActivity : AppCompatActivity() {
         binding.navigationMenu.setupWithNavController(navController)
         binding.navigationMenu.itemIconSize = 110
 
-        binding.navigationMenu.setOnNavigationItemSelectedListener { item ->
+        val dialog = CustomDialog(this)
+        dialog.setOnDismissListener {
+            val text1 = dialog.getText1()
+            val text2 = dialog.getText2()
+            val text3 = dialog.getText3()
 
-            val animation = AnimationUtils.loadAnimation(this, R.anim.anim_bt)
-            val view = binding.navigationMenu.findViewById<View>(item.itemId)
-            view.startAnimation(animation)
+        }
 
-            when (item.itemId) {
-                R.id.listFragment, R.id.homeFragment, R.id.historicFragment -> {
-                    navController.navigate(item.itemId)
-                    true
-                }
-                else -> false
-            }
+        binding.navigationMenu.findViewById<View>(R.id.listFragment).setOnClickListener {
+            dialog.show()
+            navController.navigate(R.id.homeFragment)
         }
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when(destination.id){
-                R.id.listFragment, R.id.homeFragment, R.id.historicFragment -> {
+                R.id.homeFragment, R.id.historicFragment -> {
                     binding.navigationMenu.visibility = View.VISIBLE
                 }
                 else -> {
                     binding.navigationMenu.visibility = View.GONE
                 }
+
             }
+
         }
+
     }
 
     override fun onDestroy() {
