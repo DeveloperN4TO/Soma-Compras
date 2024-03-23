@@ -1,4 +1,4 @@
-package com.example.somacompras
+package com.example.compras
 
 import org.junit.Test
 
