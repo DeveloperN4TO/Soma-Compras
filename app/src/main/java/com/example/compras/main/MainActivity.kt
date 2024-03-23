@@ -2,10 +2,14 @@ package com.example.compras.main
 
 import android.os.Bundle
 import android.view.View
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.iterator
+import androidx.core.view.updateLayoutParams
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
@@ -30,16 +34,28 @@ class MainActivity : AppCompatActivity() {
         navController = navHostFragment.findNavController()
         binding.navigationMenu.setupWithNavController(navController)
 
-        navController.addOnDestinationChangedListener { _ , destination, _ ->
+        binding.navigationMenu.itemIconSize = 110
+
+        binding.navigationMenu.setOnNavigationItemSelectedListener { item ->
+
+            val animation = AnimationUtils.loadAnimation(this, R.anim.anim_bt)
+
+            val view = binding.navigationMenu.findViewById<View>(item.itemId)
+            view.startAnimation(animation)
+
+            true
+        }
+
+
+
+        navController.addOnDestinationChangedListener { _, destination, _ ->
             when(destination.id){
                 R.id.homeFragment -> binding.navigationMenu.visibility = View.VISIBLE
                 R.id.listFragment -> binding.navigationMenu.visibility = View.VISIBLE
                 R.id.historicFragment -> binding.navigationMenu.visibility = View.VISIBLE
                 else -> binding.navigationMenu.visibility = View.GONE
             }
-
         }
-
     }
 
     override fun onDestroy() {

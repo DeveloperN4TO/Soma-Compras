@@ -21,22 +21,23 @@
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/navigation_menu"
         style="@style/style_edit"
-        android:layout_width="300dp"
-        android:layout_height="0dp"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
         app:backgroundTint="@color/transparent"
         app:itemIconTint="@color/menu_color"
         app:itemTextColor="@color/menu_color"
-        app:labelVisibilityMode="labeled"
-        android:paddingTop="20dp"
         android:elevation="50dp"
         app:elevation="50dp"
+        android:layout_marginHorizontal="20dp"
+        android:paddingTop="25dp"
         android:focusableInTouchMode="true"
         android:layout_marginBottom="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:itemRippleColor="@android:color/transparent"
-        app:menu="@menu/nav_menu" >
+        app:menu="@menu/nav_menu"
+        >
 
 
     </com.google.android.material.bottomnavigation.BottomNavigationView>
