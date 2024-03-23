@@ -26,13 +26,8 @@ class MainActivity : AppCompatActivity() {
         _binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         supportActionBar?.hide()
-
-        navHostFragment = supportFragmentManager.findFragmentById(R.id.containerPai) as NavHostFragment
-        navController = navHostFragment.findNavController()
-        binding.navigationMenu.setupWithNavController(navController)
-        binding.navigationMenu.itemIconSize = 110
-
         val dialog = CustomDialog(this)
+
         dialog.setOnDismissListener {
             val text1 = dialog.getText1()
             val text2 = dialog.getText2()
@@ -40,9 +35,31 @@ class MainActivity : AppCompatActivity() {
 
         }
 
-        binding.navigationMenu.findViewById<View>(R.id.listFragment).setOnClickListener {
-            dialog.show()
-            navController.navigate(R.id.homeFragment)
+
+        navHostFragment = supportFragmentManager.findFragmentById(R.id.containerPai) as NavHostFragment
+        navController = navHostFragment.findNavController()
+        binding.navigationMenu.setupWithNavController(navController)
+        binding.navigationMenu.itemIconSize = 110
+
+        binding.navigationMenu.setOnNavigationItemSelectedListener { item ->
+
+            val animation = AnimationUtils.loadAnimation(this, R.anim.anim_bt)
+            val view = binding.navigationMenu.findViewById<View>(item.itemId)
+            view.startAnimation(animation)
+
+            binding.navigationMenu.findViewById<View>(R.id.listFragment).setOnClickListener {
+                it.startAnimation(animation)
+                dialog.show()
+                navController.navigate(R.id.homeFragment)
+            }
+
+            when (item.itemId) {
+                R.id.homeFragment, R.id.historicFragment -> {
+                    navController.navigate(item.itemId)
+                    true
+                }
+                else -> false
+            }
         }
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
@@ -53,12 +70,10 @@ class MainActivity : AppCompatActivity() {
                 else -> {
                     binding.navigationMenu.visibility = View.GONE
                 }
-
             }
-
         }
-
     }
+
 
     override fun onDestroy() {
         super.onDestroy()
