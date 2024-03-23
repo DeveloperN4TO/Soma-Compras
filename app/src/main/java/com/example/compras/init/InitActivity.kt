@@ -2,6 +2,10 @@ package com.example.compras.init
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
+import android.view.View
+import android.view.animation.AnimationUtils
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -25,17 +29,20 @@ class InitActivity : AppCompatActivity() {
     }
 
     private fun onClick() {
-        with(binding){
-            btnNext.setOnClickListener {
+        binding.btnNext.setOnClickListener {
+            val handler = Handler(Looper.getMainLooper())
+
+            handler.postDelayed({
                 val intent = Intent(this@InitActivity, MainActivity::class.java)
                 startActivity(intent)
+            }, 900)
 
-            }
-
+            val animation = AnimationUtils.loadAnimation(this@InitActivity, R.anim.anim_bt)
+            binding.btnNext.startAnimation(animation)
         }
-
-
     }
+
+
 
     private fun onValidate(): Boolean{
 
