@@ -29,9 +29,9 @@ class MainActivity : AppCompatActivity() {
         val dialog = CustomDialog(this)
 
         dialog.setOnDismissListener {
-            val text1 = dialog.getText1()
-            val text2 = dialog.getText2()
-            val text3 = dialog.getText3()
+//            val text1 = dialog.getText1()
+//            val text2 = dialog.getText2()
+//            val text3 = dialog.getText3()
 
         }
 
