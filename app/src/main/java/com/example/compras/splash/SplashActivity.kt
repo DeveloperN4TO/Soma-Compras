@@ -8,6 +8,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
 import com.example.compras.R
+import com.example.compras.dataBase.SharedPreferences
 import com.example.compras.databinding.ActivitySplashBinding
 import com.example.compras.init.InitActivity
 import com.example.compras.main.MainActivity
@@ -29,10 +30,10 @@ class SplashActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        setupAnimation()
+        setupAnimationAndNavigate()
     }
 
-    private fun setupAnimation() {
+    private fun setupAnimationAndNavigate() {
         lifecycleScope.launch {
             var count = 0f
             for (i in 1..50) {
@@ -40,12 +41,17 @@ class SplashActivity : AppCompatActivity() {
                 count += 0.02f
                 delay(25)
             }
-            navigateToLogin()
+            navigate()
         }
     }
 
-    private fun navigateToLogin() {
-        val intent = Intent(this, InitActivity::class.java)
+    private fun navigate() {
+        val userName = SharedPreferences.getName(this)
+        val intent = if (userName != null) {
+            Intent(this, MainActivity::class.java)
+        } else {
+            Intent(this, InitActivity::class.java)
+        }
         startActivity(intent)
         finish()
     }

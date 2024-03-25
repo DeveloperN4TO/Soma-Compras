@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.compras.R
+import com.example.compras.dataBase.SharedPreferences
 import com.example.compras.databinding.ActivityInitBinding
 import com.example.compras.main.MainActivity
 
@@ -30,15 +31,24 @@ class InitActivity : AppCompatActivity() {
 
     private fun onClick() {
         binding.btnNext.setOnClickListener {
-            val handler = Handler(Looper.getMainLooper())
+            val name = binding.editName.text.toString().trim()
 
-            handler.postDelayed({
-                val intent = Intent(this@InitActivity, MainActivity::class.java)
-                startActivity(intent)
-            }, 700)
+            if (name.isEmpty()) {
+                binding.editName.error = "Por favor, insira seu nome."
+            } else {
 
-            val animation = AnimationUtils.loadAnimation(this@InitActivity, R.anim.anim_bt)
-            binding.btnNext.startAnimation(animation)
+                SharedPreferences.saveName(this, name)
+
+                val handler = Handler(Looper.getMainLooper())
+
+                handler.postDelayed({
+                    val intent = Intent(this@InitActivity, MainActivity::class.java)
+                    startActivity(intent)
+                }, 700)
+
+                val animation = AnimationUtils.loadAnimation(this@InitActivity, R.anim.anim_bt)
+                binding.btnNext.startAnimation(animation)
+            }
         }
     }
 
