@@ -1,15 +1,204 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.ListFragment">
 
-    <TextView
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/containerCOnstraint"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="list"
-        android:layout_gravity="center"
-        android:gravity="center"/>
+        android:layout_height="70000dp"
+        >
 
-</FrameLayout>
+        <TextView
+            android:id="@+id/txtWelcome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/poppins"
+            android:text="Bem-vindo(a)!"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/btnExit"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/poppins"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:layout_marginEnd="20dp"
+            android:background="@color/full_glass"
+            android:src="@drawable/ic_exit"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/txtExit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            android:text="Sair"
+            android:layout_marginEnd="20dp"
+            android:background="@color/full_glass"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/btnExit"
+            app:layout_constraintTop_toBottomOf="@+id/btnExit" />
+
+
+
+        <TextView
+            android:id="@+id/txtNameUser"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nome do usuário"
+            android:textSize="15sp"
+            android:fontFamily="@font/poppins"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtWelcome"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="2dp"
+            />
+
+        <TextView
+            android:id="@+id/txtSaldo"
+            android:layout_width="wrap_content"
+            android:layout_height="25dp"
+            android:text="Seu saldo"
+            android:textSize="16sp"
+            android:fontFamily="@font/poppins"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtWelcome"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="30dp"
+            />
+
+        <EditText
+            android:id="@+id/saldo"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            style="@style/style_button"
+            app:layout_constraintTop_toBottomOf="@+id/txtSaldo"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:hint="R$ 0,00"
+            android:maxLines="1"
+            android:gravity="center"
+            android:paddingEnd="40dp"
+            android:inputType="numberDecimal"
+            android:fontFamily="@font/poppins"
+            android:drawablePadding="10dp"
+            android:paddingTop="5dp"
+            android:paddingStart="10dp"
+            android:drawableStart="@drawable/ic_ediit"
+            android:layout_marginHorizontal="20dp"
+            android:ellipsize="end"
+            android:textColorHint="@color/black"
+            android:textColor="@color/black"
+            />
+
+        <FrameLayout
+            android:id="@+id/containerFrame"
+            style="@style/style_button"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:backgroundTint="@color/green"
+            app:layout_constraintTop_toBottomOf="@+id/saldo"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginHorizontal="90dp"
+            android:layout_marginTop="20dp"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:text="Valor da compra"
+                android:textSize="16sp"
+                android:layout_gravity="center|top"
+                android:fontFamily="@font/poppins"
+                android:textColor="@color/black"
+                android:layout_marginTop="5dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtWelcome"
+                app:layout_constraintEnd_toEndOf="parent"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="R$ 00,00"
+                android:textSize="25sp"
+                android:layout_gravity="center"
+                android:fontFamily="@font/poppins_bold"
+                android:textColor="@color/black"
+                android:layout_marginTop="15dp"
+                android:maxLines="1"
+                android:layout_marginHorizontal="5dp"
+                android:ellipsize="end"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtWelcome"
+                app:layout_constraintEnd_toEndOf="parent"
+                />
+
+        </FrameLayout>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/addNewItem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="TODO"
+            android:src="@drawable/ic_plus"
+            android:background="@color/green"
+            android:backgroundTint="@color/green"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="5dp"
+            app:elevation="35dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/containerFrame"
+            />
+
+
+        <FrameLayout
+            style="@style/style_frame"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="visible"
+            android:padding="15dp"
+            android:backgroundTint="@color/white"
+            app:layout_constraintTop_toBottomOf="@+id/containerFrame"
+            app:layout_constraintBottom_toBottomOf="@+id/containerCOnstraint"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="50dp"
+            >
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/allProducerHome"
+                android:layout_width="match_parent"
+                android:layout_height="7500dp"
+                android:orientation="vertical"
+                android:elevation="50dp"
+                android:backgroundTint="@color/white"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/item_product"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/near_you_text"/>
+
+        </FrameLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.core.widget.NestedScrollView>
