@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity() {
             when (item.itemId) {
                 R.id.homeFragment -> navController.navigate(R.id.homeFragment)
                 R.id.listFragment -> navController.navigate(R.id.listFragment)
-                R.id.historicFragment -> navController.navigate(R.id.historicFragment)
+                R.id.profileFragment -> navController.navigate(R.id.profileFragment)
             }
 
             true
@@ -47,7 +47,7 @@ class MainActivity : AppCompatActivity() {
 
         navController.addOnDestinationChangedListener { _ , destination, _ ->
             when(destination.id){
-                R.id.homeFragment, R.id.listFragment, R.id.historicFragment -> binding.navigationMenu.visibility = View.VISIBLE
+                R.id.homeFragment, R.id.listFragment, R.id.profileFragment -> binding.navigationMenu.visibility = View.VISIBLE
                 else -> binding.navigationMenu.visibility = View.GONE
             }
         }

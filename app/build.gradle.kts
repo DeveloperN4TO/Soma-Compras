@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+    id("androidx.navigation.safeargs.kotlin")
     id("kotlin-parcelize")
 
 }
@@ -57,7 +58,7 @@ dependencies {
 
     implementation("androidx.navigation:navigation-fragment-ktx:2.7.7")
     implementation("androidx.navigation:navigation-ui-ktx:2.7.7")
-    
+
     //animation
     implementation ("com.airbnb.android:lottie:6.1.0")
 
@@ -72,8 +73,7 @@ dependencies {
     implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0")
     implementation ("androidx.lifecycle:lifecycle-livedata-ktx:2.7.0")
     implementation ("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
-
-
+    
     // Navigation
     implementation ("com.google.android.material:material:1.11.0-rc01")
     implementation("com.google.android.material:material:1.10.0")

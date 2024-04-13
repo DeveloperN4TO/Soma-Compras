@@ -11,13 +11,31 @@
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" />
     <fragment
+        android:id="@+id/listFragment"
+        android:name="com.example.compras.ui.ListFragment"
+        android:label="fragment_list"
+        tools:layout="@layout/fragment_list" >
+        <action
+            android:id="@+id/action_listFragment_to_detailsFragment"
+            app:destination="@id/detailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.compras.ui.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_profileFragment_to_historicFragment"
+            app:destination="@id/historicFragment" />
+    </fragment>
+    <fragment
         android:id="@+id/historicFragment"
         android:name="com.example.compras.ui.HistoricFragment"
         android:label="fragment_historic"
         tools:layout="@layout/fragment_historic" />
     <fragment
-        android:id="@+id/listFragment"
-        android:name="com.example.compras.ui.ListFragment"
-        android:label="fragment_list"
-        tools:layout="@layout/fragment_list" />
+        android:id="@+id/detailsFragment"
+        android:name="com.example.compras.ui.DetailsFragment"
+        android:label="fragment_details"
+        tools:layout="@layout/fragment_details" />
 </navigation>

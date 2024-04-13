@@ -6,12 +6,10 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import com.example.compras.dataBase.SharedPreferences
 import com.example.compras.databinding.FragmentListBinding
 import com.example.compras.dialog.CustomDialog
-import com.example.compras.util.addCurrencyTextWatcher
 
 
 class ListFragment : Fragment() {
@@ -33,7 +31,6 @@ class ListFragment : Fragment() {
         initGetShared()
         initCurrent()
         onClick()
-        setupExitToApp()
 
         val dialog = CustomDialog(
             requireContext()
@@ -49,7 +46,7 @@ class ListFragment : Fragment() {
     private fun initGetShared() {
         val userName = SharedPreferences.getName(requireContext())
         if (!userName.isNullOrEmpty()) {
-            binding.txtNameUser.text = "$userName!"
+
         }
 
         val currentBalance = SharedPreferences.getCurrent(requireContext())
@@ -78,39 +75,6 @@ class ListFragment : Fragment() {
             dialog.show()
         }
     }
-
-    private fun setupExitToApp() {
-        binding.btnExit.setOnClickListener {
-            ActivityCompat.finishAffinity(
-                requireActivity()
-            )
-
-
-        }
-        binding.btnExit.setOnLongClickListener {
-            ActivityCompat.finishAffinity(
-                requireActivity()
-            )
-            activity?.finish()
-            true
-        }
-
-        binding.txtExit.setOnClickListener {
-            ActivityCompat.finishAffinity(
-                requireActivity()
-            )
-            activity?.finish()
-
-        }
-        binding.txtExit.setOnLongClickListener {
-            ActivityCompat.finishAffinity(
-                requireActivity()
-            )
-            activity?.finish()
-            true
-        }
-    }
-
 
     override fun onDestroyView() {
         super.onDestroyView()

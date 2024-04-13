@@ -13,63 +13,6 @@
         >
 
         <TextView
-            android:id="@+id/txtWelcome"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:fontFamily="@font/poppins"
-            android:text="Bem-vindo(a)!"
-            android:textColor="@color/white"
-            android:textSize="12sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/btnExit"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginTop="20dp"
-            android:fontFamily="@font/poppins"
-            android:textColor="@color/white"
-            android:textSize="16sp"
-            android:layout_marginEnd="20dp"
-            android:background="@color/full_glass"
-            android:src="@drawable/ic_exit"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/txtExit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/poppins"
-            android:textColor="@color/white"
-            android:textSize="12sp"
-            android:text="Sair"
-            android:layout_marginEnd="20dp"
-            android:background="@color/full_glass"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/btnExit"
-            app:layout_constraintTop_toBottomOf="@+id/btnExit" />
-
-
-
-        <TextView
-            android:id="@+id/txtNameUser"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Nome do usuário"
-            android:textSize="15sp"
-            android:fontFamily="@font/poppins"
-            android:textColor="@color/white"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtWelcome"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="2dp"
-            />
-
-        <TextView
             android:id="@+id/txtSaldo"
             android:layout_width="wrap_content"
             android:layout_height="25dp"
@@ -78,8 +21,8 @@
             android:fontFamily="@font/poppins"
             android:textColor="@color/white"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtWelcome"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             android:layout_marginTop="30dp"
             />
 
@@ -154,6 +97,21 @@
         </FrameLayout>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/finish"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="TODO"
+            android:src="@drawable/ic_yes"
+            android:background="@color/white"
+            android:backgroundTint="@color/white"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="5dp"
+            app:elevation="35dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/containerFrame"
+            />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/addNewItem"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -165,9 +123,8 @@
             android:layout_marginEnd="5dp"
             app:elevation="35dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/containerFrame"
+            app:layout_constraintTop_toBottomOf="@+id/finish"
             />
-
 
         <FrameLayout
             style="@style/style_frame"
@@ -180,7 +137,7 @@
             app:layout_constraintBottom_toBottomOf="@+id/containerCOnstraint"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="100dp"
             >
 
             <androidx.recyclerview.widget.RecyclerView

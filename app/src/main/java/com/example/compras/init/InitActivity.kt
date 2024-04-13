@@ -49,10 +49,10 @@ class InitActivity : AppCompatActivity() {
                 val animation = AnimationUtils.loadAnimation(this@InitActivity, R.anim.anim_bt)
                 binding.btnNext.startAnimation(animation)
             }
+
         }
+
     }
-
-
 
     private fun onValidate(): Boolean{
 
@@ -63,4 +63,5 @@ class InitActivity : AppCompatActivity() {
         super.onDestroy()
         _binding = null
     }
+
 }
