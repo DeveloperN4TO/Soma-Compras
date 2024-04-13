@@ -1,42 +1,36 @@
 package com.example.compras.dialog
 
+import android.app.AlertDialog
 import android.app.Dialog
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.widget.EditText
-import com.example.compras.R
+import androidx.appcompat.app.AppCompatDialogFragment
+import com.example.compras.databinding.CustomAddProductBinding
 
-class CustomDialog(context: Context) : Dialog(context) {
+class CustomDialog(private val callback: (String, Int, Double) -> Unit) : AppCompatDialogFragment() {
 
-//    private lateinit var editText1: EditText
-//    private lateinit var editText2: EditText
-//    private lateinit var editText3: EditText
+    private lateinit var binding: CustomAddProductBinding
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        binding = CustomAddProductBinding.inflate(LayoutInflater.from(context))
 
-        val inflater = LayoutInflater.from(context)
-        val view = inflater.inflate(R.layout.custom_add_product, null)
-        setContentView(view)
+        val builder = AlertDialog.Builder(requireActivity())
+        builder.setView(binding.root)
 
-        // Inicializar as referências aos EditTexts
-//        editText1 = view.findViewById(R.id.editText1)
-//        editText2 = view.findViewById(R.id.editText2)
-//        editText3 = view.findViewById(R.id.editText3)
+        val dialog = builder.create()
+
+        binding.buttonAddProduct.setOnClickListener {
+            val nome = binding.nameProduct.text.toString()
+            val quantidade = binding.quantityProduct.text.toString().toInt()
+            val valor = binding.valueProduct.text.toString().toDouble()
+            callback.invoke(nome, quantidade, valor)
+            dialog.dismiss()
+        }
+
+        binding.buttonCancelProduct.setOnClickListener {
+            dialog.dismiss()
+        }
+
+        return dialog
     }
-
-    // Métodos para obter o texto dos EditTexts
-//    fun getText1(): String {
-//        return editText1.text.toString()
-//    }
-//
-//    fun getText2(): String {
-//        return editText2.text.toString()
-//    }
-//
-//    fun getText3(): String {
-//        return editText3.text.toString()
-//    }
-
 }

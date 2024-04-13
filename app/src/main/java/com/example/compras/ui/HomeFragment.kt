@@ -31,9 +31,7 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         initGetShared()
         initCurrent()
-        val dialog = CustomDialog(
-            requireContext()
-        )
+
 
     }
     private fun initCurrent() {
