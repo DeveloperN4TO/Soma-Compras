@@ -19,7 +19,7 @@ fun EditText.addCurrencyTextWatcher() {
             if (s.toString() != current) {
                 editText.removeTextChangedListener(this)
 
-                val cleanString = s.toString().replace(Regex("[^0-9]"), "")
+                val cleanString = s.toString().replace(Regex("[^0-9]"), "") // Remove todos os caracteres não numéricos
                 val parsed = cleanString.toDoubleOrNull() ?: 0.0
                 val formatted = formatCurrency(parsed / 100)
 
@@ -37,6 +37,29 @@ fun EditText.addCurrencyTextWatcher() {
             return format.format(value)
         }
     })
+}
 
+fun EditText.removeCurrencyMask() {
+    val editText = this
+    editText.addTextChangedListener(object : TextWatcher {
+        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
+        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+
+        override fun afterTextChanged(s: Editable?) {
+            editText.removeTextChangedListener(this)
+
+            // Remove todos os caracteres não numéricos
+            val cleanString = s.toString().replace(Regex("[^0-9.]"), "")
+            editText.setText(cleanString)
+
+            editText.addTextChangedListener(this)
+        }
+    })
+}
+
+fun Double.formatAsCurrency(): String {
+    val format = NumberFormat.getCurrencyInstance(Locale("pt", "BR"))
+    format.minimumFractionDigits = 2
+    return format.format(this)
 }

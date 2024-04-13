@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.compras.dataClass.Product
 import com.example.compras.databinding.ItemProductBinding
+import com.example.compras.util.formatAsCurrency
 
 class ProductAdapter(private val productList: MutableList<Product>) :
     RecyclerView.Adapter<ProductAdapter.ProductViewHolder>() {
@@ -16,7 +17,10 @@ class ProductAdapter(private val productList: MutableList<Product>) :
             binding.apply {
                 productName.text = product.nome
                 productQuant.text = product.quantidade.toString()
-                productValue.text = product.valor.toString()
+
+                // Formate o valor como moeda antes de exibi-lo
+                val formattedValue = product.valor.formatAsCurrency()
+                productValue.text = formattedValue
             }
         }
     }
