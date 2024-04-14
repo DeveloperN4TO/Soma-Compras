@@ -1,11 +1,12 @@
 package com.example.compras.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.compras.dataClass.Product
 import com.example.compras.databinding.ItemProductBinding
-import com.example.compras.util.formatAsCurrency
+import com.example.compras.util.formatAssCurrency
 
 class ProductAdapter(private val productList: MutableList<Product>) :
     RecyclerView.Adapter<ProductAdapter.ProductViewHolder>() {
@@ -18,9 +19,12 @@ class ProductAdapter(private val productList: MutableList<Product>) :
                 productName.text = product.nome
                 productQuant.text = product.quantidade.toString()
 
-                // Formate o valor como moeda antes de exibi-lo
-                val formattedValue = product.valor.formatAsCurrency()
-                productValue.text = formattedValue
+                Log.e("teste", product.quantidade.toString())
+                Log.e("teste", product.valor.toString())
+                Log.e("teste", product.nome.toString())
+
+                // Formatando o valor como moeda brasileira
+                productValue.text = product.valor.formatAssCurrency()
             }
         }
     }

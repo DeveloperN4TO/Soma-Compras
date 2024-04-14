@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import androidx.appcompat.app.AppCompatDialogFragment
 import com.example.compras.databinding.CustomAddProductBinding
 import com.example.compras.util.addCurrencyTextWatcher
-import com.example.compras.util.removeCurrencyMask
 
 class CustomDialog(private val callback: (String, Int, Double) -> Unit) : AppCompatDialogFragment() {
 
@@ -20,16 +19,22 @@ class CustomDialog(private val callback: (String, Int, Double) -> Unit) : AppCom
         builder.setView(binding.root)
 
         val dialog = builder.create()
+        binding.valueProduct.addCurrencyTextWatcher()
 
         binding.buttonAddProduct.setOnClickListener {
             val nome = binding.nameProduct.text.toString()
             val quantidade = binding.quantityProduct.text.toString().toInt()
-            val valorString = binding.valueProduct.text.toString()
+            val valorText = binding.valueProduct.text.toString()
 
-            val cleanString = valorString.replace(Regex("[^0-9.]"), "")
-            val valorNumerico = cleanString.toDoubleOrNull() ?: 0.0
+            val valorSemMascara = valorText.replace(Regex("[^0-9]"), "")
 
-            callback.invoke(nome, quantidade, valorNumerico)
+            val valorFormatado = if (valorSemMascara.takeLast(2) == "00") {
+                valorSemMascara.dropLast(2)
+            } else {
+                (valorSemMascara.toDoubleOrNull() ?: 0.0) / 100
+            }
+
+            callback.invoke(nome, quantidade, valorFormatado.toString().toDouble())
             dialog.dismiss()
         }
 

@@ -58,7 +58,7 @@ fun EditText.removeCurrencyMask() {
     })
 }
 
-fun Double.formatAsCurrency(): String {
+fun Double.formatAssCurrency(): String {
     val format = NumberFormat.getCurrencyInstance(Locale("pt", "BR"))
     format.minimumFractionDigits = 2
     return format.format(this)
