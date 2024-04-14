@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/full_glass"
+    android:background="@color/white"
     android:padding="10dp"
     android:backgroundTint="@color/full_glass">
 
@@ -12,6 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="01"
+        android:layout_marginStart="5dp"
         android:textColor="@color/black_gray"
         android:fontFamily="@font/poppins_bold"
         app:layout_constraintStart_toStartOf="parent"
@@ -36,6 +37,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="R$ 20,00"
+        android:layout_marginEnd="10dp"
+        android:textColor="@color/black_gray"
+        android:fontFamily="@font/poppins_bold"
+        app:layout_constraintEnd_toStartOf="@+id/productDelete"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/productDelete"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:background="@drawable/ic_delete"
         android:textColor="@color/black_gray"
         android:fontFamily="@font/poppins_bold"
         app:layout_constraintEnd_toEndOf="parent"

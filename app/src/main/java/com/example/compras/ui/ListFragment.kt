@@ -14,6 +14,7 @@ import com.example.compras.dataClass.Product
 import com.example.compras.databinding.FragmentListBinding
 import com.example.compras.dialog.CustomDialog
 import com.example.compras.dialog.CustomDialogListener
+import com.example.compras.util.formatAssCurrency
 
 class ListFragment : Fragment(), CustomDialogListener {
 
@@ -39,7 +40,13 @@ class ListFragment : Fragment(), CustomDialogListener {
     }
 
     private fun initRecyclerView() {
-        productAdapter = ProductAdapter(productList)
+        productAdapter = ProductAdapter(productList, productDeleteListener =
+        object : ProductAdapter.ProductDeleteListener {
+            override fun onDeleteProductClicked(position: Int) {
+                productList.removeAt(position)
+                productAdapter.notifyItemRemoved(position)
+            }
+        })
         binding.allProducerHome.apply {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = productAdapter
@@ -89,5 +96,12 @@ class ListFragment : Fragment(), CustomDialogListener {
         val novoProduto = Product(nome, quantidade, valor)
         productList.add(novoProduto)
         productAdapter.notifyDataSetChanged()
+
+        var valorTotal = 0.0
+        for (produto in productList) {
+            valorTotal += produto.quantidade * produto.valor
+        }
+
+        binding.totalValue.text = valorTotal.formatAssCurrency()
     }
 }
