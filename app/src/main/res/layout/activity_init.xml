@@ -11,7 +11,7 @@
         android:id="@+id/txt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Por favor Digite seu nome!"
+        android:text="Por favor digite seu nome!"
         android:fontFamily="@font/poppins_bold"
         android:textColor="@color/white"
         android:textSize="19sp"

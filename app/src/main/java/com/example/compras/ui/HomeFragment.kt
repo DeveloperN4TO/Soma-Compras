@@ -7,11 +7,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.app.ActivityCompat
-import androidx.core.app.ActivityCompat.finishAffinity
 import com.example.compras.dataBase.SharedPreferences
 import com.example.compras.databinding.FragmentHomeBinding
-import com.example.compras.dialog.CustomDialog
 import com.example.compras.util.addCurrencyTextWatcher
 
 class HomeFragment : Fragment() {
@@ -32,12 +29,14 @@ class HomeFragment : Fragment() {
         initGetShared()
         initCurrent()
 
+        // Adiciona o TextWatcher para formatar o saldo como moeda enquanto o usuário digita
+        binding.saldo.addCurrencyTextWatcher()
+    }
 
-    }
     private fun initCurrent() {
-        SharedPreferences.saveCurrent(requireContext(),
-            binding.saldo.text.toString())
+        SharedPreferences.saveCurrent(requireContext(), binding.saldo.text.toString())
     }
+
     private fun initGetShared() {
         val userName = SharedPreferences.getName(requireContext())
         if (!userName.isNullOrEmpty()) {
@@ -57,15 +56,11 @@ class HomeFragment : Fragment() {
             override fun afterTextChanged(s: Editable?) {
                 SharedPreferences.saveCurrent(requireContext(), s.toString())
             }
-
         })
-
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-
     }
-
 }
