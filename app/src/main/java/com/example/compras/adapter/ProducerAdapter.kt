@@ -1,5 +1,6 @@
 package com.example.compras.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -7,15 +8,19 @@ import com.example.compras.dataClass.Product
 import com.example.compras.databinding.ItemProductBinding
 import com.example.compras.util.formatAssCurrency
 
-class ProductAdapter(private val productList: MutableList<Product>, private val productDeleteListener: ProductDeleteListener) :
-    RecyclerView.Adapter<ProductAdapter.ProductViewHolder>() {
+class ProductAdapter(
+    private val productList: MutableList<Product>,
+    private val productDeleteListener: ProductDeleteListener? = null // Opcional agora
+) : RecyclerView.Adapter<ProductAdapter.ProductViewHolder>() {
 
     interface ProductDeleteListener {
         fun onDeleteProductClicked(position: Int)
     }
 
-    class ProductViewHolder(private val binding: ItemProductBinding, private val productDeleteListener: ProductDeleteListener) :
-        RecyclerView.ViewHolder(binding.root) {
+    class ProductViewHolder(
+        private val binding: ItemProductBinding,
+        private val productDeleteListener: ProductDeleteListener?
+    ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(product: Product, position: Int) {
             binding.apply {
@@ -23,8 +28,9 @@ class ProductAdapter(private val productList: MutableList<Product>, private val 
                 productQuant.text = product.quantidade.toString()
                 productValue.text = product.valor.formatAssCurrency()
 
+                // Apenas configura o listener se ele não for nulo
                 productDelete.setOnClickListener {
-                    productDeleteListener.onDeleteProductClicked(position)
+                    productDeleteListener?.onDeleteProductClicked(position)
                 }
             }
         }
@@ -37,6 +43,7 @@ class ProductAdapter(private val productList: MutableList<Product>, private val 
 
     override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
         val product = productList[position]
+        Log.d("AASF", "ADAPTER $position: $product")
         holder.bind(product, position)
     }
 
@@ -44,3 +51,4 @@ class ProductAdapter(private val productList: MutableList<Product>, private val 
         return productList.size
     }
 }
+

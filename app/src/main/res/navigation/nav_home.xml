@@ -24,7 +24,7 @@
     </fragment>
     <fragment
         android:id="@+id/historicFragment"
-        android:name="com.example.compras.ui.HistoricFragment"
+        android:name="com.example.compras.ui.historic.HistoricFragment"
         android:label="fragment_historic"
         tools:layout="@layout/fragment_historic" />
     <fragment
