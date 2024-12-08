@@ -5,6 +5,7 @@
     <string name="exit_to_app">Botão sair do aplicativo</string>
     <string name="default_price">R$ 00,00</string>
     <string name="number_to_version">Versão 1.0.0</string>
+    <string name="empty_order">Nenhum Produto Adicionado!</string>
     <string name="value_order">Valor da compra</string>
     <string name="your_wallet">Seu saldo</string>
 </resources>

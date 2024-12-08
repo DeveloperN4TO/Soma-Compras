@@ -3,12 +3,14 @@ package com.example.compras.ui
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.compras.R
 import com.example.compras.adapter.ProductAdapter
 import com.example.compras.dataBase.SharedPreferences
 import com.example.compras.dataClass.Product
@@ -46,11 +48,20 @@ class ListFragment : Fragment(), CustomDialogListener {
             override fun onDeleteProductClicked(position: Int) {
                 productList.removeAt(position)
                 productAdapter.notifyItemRemoved(position)
+
+                if (productAdapter.itemCount == 0){
+                    binding.finishButton.visibility = View.GONE
+                    binding.orderEmpty.visibility = View.VISIBLE
+                    binding.totalValue.text = getString(R.string.default_price)
+                }
             }
         })
+
         binding.allProducerHome.apply {
             layoutManager = LinearLayoutManager(requireContext())
+            productAdapter.notifyDataSetChanged()
             adapter = productAdapter
+
         }
     }
 
@@ -102,6 +113,11 @@ class ListFragment : Fragment(), CustomDialogListener {
         }
 
         binding.totalValue.text = valorTotal.formatAssCurrency()
+
+        if (productAdapter.itemCount > 0){
+            binding.finishButton.visibility = View.VISIBLE
+            binding.orderEmpty.visibility = View.GONE
+        }
     }
 
     override fun onDestroyView() {

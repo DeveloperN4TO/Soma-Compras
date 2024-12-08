@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.example.compras.databinding.FragmentHistoricBinding
 
 class HistoricFragment : Fragment() {
@@ -22,7 +23,15 @@ class HistoricFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        onClick()
 
+
+    }
+
+    private fun onClick() = with(binding){
+        toolBar.setOnClickListener {
+            findNavController().popBackStack()
+        }
 
     }
 
