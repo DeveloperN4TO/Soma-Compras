@@ -12,11 +12,60 @@
         android:layout_height="70000dp"
         >
 
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnHistoric"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:background="@drawable/ic_historic"
+            android:layout_marginEnd="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            />
+
+        <LinearLayout
+            android:id="@+id/container2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="15dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            >
+
+            <ImageView
+                android:id="@+id/icExit"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:contentDescription="@string/exit_to_app"
+                android:src="@drawable/ic_exit"
+                android:layout_gravity="center"
+                app:layout_constraintTop_toBottomOf="@+id/container"
+                app:layout_constraintEnd_toStartOf="@+id/btnExit"
+                />
+
+            <TextView
+                android:id="@+id/btnExit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sair"
+                android:layout_marginTop="10dp"
+                android:textSize="16sp"
+                android:textColor="@color/white"
+                app:layout_constraintTop_toBottomOf="@+id/container"
+                app:layout_constraintEnd_toEndOf="parent"
+                />
+
+        </LinearLayout>
+
         <TextView
             android:id="@+id/txtSaldo"
             android:layout_width="wrap_content"
             android:layout_height="25dp"
-            android:text="Seu saldo"
+            android:text="@string/your_wallet"
             android:textSize="16sp"
             android:fontFamily="@font/poppins"
             android:textColor="@color/white"
@@ -27,14 +76,14 @@
             />
 
         <TextView
-            android:id="@+id/saldo"
+            android:id="@+id/balance"
             android:layout_width="200dp"
             android:layout_height="50dp"
             style="@style/style_button"
             app:layout_constraintTop_toBottomOf="@+id/txtSaldo"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:hint="R$ 0,00"
+            android:hint="@string/default_price"
             android:maxLines="1"
             android:gravity="center"
             android:inputType="numberDecimal"
@@ -54,7 +103,7 @@
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:backgroundTint="@color/green"
-            app:layout_constraintTop_toBottomOf="@+id/saldo"
+            app:layout_constraintTop_toBottomOf="@+id/balance"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginHorizontal="90dp"
@@ -64,7 +113,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="25dp"
-                android:text="Valor da compra"
+                android:text="@string/value_order"
                 android:textSize="16sp"
                 android:layout_gravity="center|top"
                 android:fontFamily="@font/poppins"
@@ -79,7 +128,7 @@
                 android:id="@+id/totalValue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="R$ 00,00"
+                android:text="@string/default_price"
                 android:textSize="25sp"
                 android:layout_gravity="center"
                 android:fontFamily="@font/poppins_bold"

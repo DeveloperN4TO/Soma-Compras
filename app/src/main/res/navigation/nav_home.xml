@@ -18,14 +18,8 @@
         <action
             android:id="@+id/action_listFragment_to_detailsFragment"
             app:destination="@id/detailsFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/profileFragment"
-        android:name="com.example.compras.ui.ProfileFragment"
-        android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" >
         <action
-            android:id="@+id/action_profileFragment_to_historicFragment"
+            android:id="@+id/action_listFragment_to_historicFragment"
             app:destination="@id/historicFragment" />
     </fragment>
     <fragment

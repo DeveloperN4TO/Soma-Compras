@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.compras.adapter.ProductAdapter
 import com.example.compras.dataBase.SharedPreferences
@@ -54,21 +55,18 @@ class ListFragment : Fragment(), CustomDialogListener {
     }
 
     private fun initCurrent() {
-        SharedPreferences.saveCurrent(requireContext(), binding.saldo.text.toString())
+        SharedPreferences.saveCurrent(requireContext(), binding.balance.text.toString())
     }
 
     private fun initGetShared() {
-        val userName = SharedPreferences.getName(requireContext())
-        if (!userName.isNullOrEmpty()) {
-
-        }
+//        val userName = SharedPreferences.getName(requireContext())
 
         val currentBalance = SharedPreferences.getCurrent(requireContext())
         if (!currentBalance.isNullOrEmpty()) {
-            binding.saldo.setText(currentBalance)
+            binding.balance.setText(currentBalance)
         }
 
-        binding.saldo.addTextChangedListener(object : TextWatcher {
+        binding.balance.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
@@ -80,19 +78,20 @@ class ListFragment : Fragment(), CustomDialogListener {
         })
     }
 
-    private fun onClick() {
-        binding.addNewItem.setOnClickListener {
+    private fun onClick() = with(binding){
+        addNewItem.setOnClickListener {
             val dialog = CustomDialog { nome, quantidade, valor ->
-                adicionarItem(nome, quantidade, valor)
+                addItem(nome, quantidade, valor)
             }
             dialog.show(requireActivity().supportFragmentManager, "CustomDialog")
         }
+
+        btnHistoric.setOnClickListener {
+            findNavController().navigate(ListFragmentDirections.actionListFragmentToHistoricFragment())
+        }
     }
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
-    override fun adicionarItem(nome: String, quantidade: Int, valor: Double) {
+
+    override fun addItem(nome: String, quantidade: Int, valor: Double) {
         val novoProduto = Product(nome, quantidade, valor)
         productList.add(novoProduto)
         productAdapter.notifyDataSetChanged()
@@ -103,5 +102,10 @@ class ListFragment : Fragment(), CustomDialogListener {
         }
 
         binding.totalValue.text = valorTotal.formatAssCurrency()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

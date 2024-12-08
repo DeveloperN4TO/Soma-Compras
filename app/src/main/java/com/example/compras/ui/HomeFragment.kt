@@ -28,8 +28,8 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         initGetShared()
         initCurrent()
+        versionApp()
 
-        // Adiciona o TextWatcher para formatar o saldo como moeda enquanto o usuário digita
         binding.saldo.addCurrencyTextWatcher()
     }
 
@@ -57,6 +57,14 @@ class HomeFragment : Fragment() {
                 SharedPreferences.saveCurrent(requireContext(), s.toString())
             }
         })
+    }
+
+    private fun versionApp(){
+
+        val context = requireContext()
+        val versionName = context.packageManager.getPackageInfo(context.packageName, 0).versionName
+
+        binding.version.text = versionName
     }
 
     override fun onDestroyView() {
