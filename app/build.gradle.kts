@@ -58,13 +58,14 @@ dependencies {
     implementation ("com.google.android.material:material:1.9.0")
 
     implementation("androidx.navigation:navigation-fragment-ktx:2.7.7")
-    implementation("androidx.navigation:navigation-ui-ktx:2.7.7")
+    implementation("androidx.navigation:navigation-ui-ktx:2.8.4")
+    implementation ("androidx.appcompat:appcompat:1.7.0")
 
     //animation
-    implementation ("com.airbnb.android:lottie:6.1.0")
+    implementation ("com.airbnb.android:lottie:6.4.0")
 
     //viewPager
-    implementation ("androidx.viewpager2:viewpager2:1.0.0")
+    implementation ("androidx.viewpager2:viewpager2:1.1.0")
     implementation ("androidx.cardview:cardview:1.0.0")
 
     // Material design

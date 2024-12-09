@@ -11,7 +11,13 @@ class HistoricViewModel : ViewModel() {
     private val _historicalData = MutableLiveData<List<Product>>()
     val historicalData: LiveData<List<Product>> get() = _historicalData
 
-//    fun loadPurchases(context: Context) {
-//        _historicalData.value = SharedPreferences.getPurchaseHistory(context)
-//    }
+    fun loadPurchases(context: Context) {
+        val purchases = SharedPreferences.getPurchaseHistory(context)
+
+        if (purchases.isNullOrEmpty()) {
+            _historicalData.value = emptyList()
+        } else {
+            _historicalData.value = purchases.reversed()
+        }
+    }
 }

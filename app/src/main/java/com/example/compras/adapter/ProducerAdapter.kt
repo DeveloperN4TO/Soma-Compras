@@ -17,6 +17,12 @@ class ProductAdapter(
         fun onDeleteProductClicked(position: Int)
     }
 
+    fun updateData(newProducts: List<Product>) {
+        productList.clear()
+        productList.addAll(newProducts)
+        notifyDataSetChanged()
+    }
+
     class ProductViewHolder(
         private val binding: ItemProductBinding,
         private val productDeleteListener: ProductDeleteListener?
@@ -28,7 +34,6 @@ class ProductAdapter(
                 productQuant.text = product.quantidade.toString()
                 productValue.text = product.valor.formatAssCurrency()
 
-                // Apenas configura o listener se ele não for nulo
                 productDelete.setOnClickListener {
                     productDeleteListener?.onDeleteProductClicked(position)
                 }
@@ -43,7 +48,6 @@ class ProductAdapter(
 
     override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
         val product = productList[position]
-        Log.d("AASF", "ADAPTER $position: $product")
         holder.bind(product, position)
     }
 

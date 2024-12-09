@@ -1,12 +1,13 @@
 package com.example.compras.ui
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -70,7 +71,6 @@ class ListFragment : Fragment(), CustomDialogListener {
     }
 
     private fun initGetShared() {
-//        val userName = SharedPreferences.getName(requireContext())
 
         val currentBalance = SharedPreferences.getCurrent(requireContext())
         if (!currentBalance.isNullOrEmpty()) {
@@ -100,6 +100,41 @@ class ListFragment : Fragment(), CustomDialogListener {
         btnHistoric.setOnClickListener {
             findNavController().navigate(ListFragmentDirections.actionListFragmentToHistoricFragment())
         }
+
+        finishButton.setOnClickListener {
+            createDialogListView()
+        }
+    }
+
+    private fun createDialogListView() {
+        val totalValue = binding.totalValue.text.toString()
+
+        val dialog = AlertDialog.Builder(requireContext())
+            .setTitle("Finalizer Pedido")
+            .setMessage("Valor total: $totalValue\nDeseja finalizar pedido?")
+            .setPositiveButton("Finalizar") { _, _ ->
+                savePurchase()
+            }
+            .setNegativeButton("Cancelar") { dialog, _ ->
+                dialog.dismiss()
+            }
+            .create()
+
+        dialog.show()
+    }
+
+    private fun savePurchase() {
+        val purchase = productList.toList()
+        SharedPreferences.savePurchase(requireContext(), purchase)
+
+        productList.clear()
+        productAdapter.notifyDataSetChanged()
+
+        binding.totalValue.text = getString(R.string.default_price)
+        binding.finishButton.visibility = View.GONE
+        binding.orderEmpty.visibility = View.VISIBLE
+
+        Toast.makeText(requireContext(), "Pedido salvo com sucesso!", Toast.LENGTH_SHORT).show()
     }
 
     override fun addItem(nome: String, quantidade: Int, valor: Double) {
